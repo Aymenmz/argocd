@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app-foo
+  name: second-app-bar
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/Aymenmz/argocd.git
+    repoURL: https://github.com/antonputra/lesson-158.git
     targetRevision: HEAD
     path: environments/staging/second-app
   destination:
@@ -22,3 +22,5 @@ spec:
     syncOptions:
       - Validate=true
       - CreateNamespace=false
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
